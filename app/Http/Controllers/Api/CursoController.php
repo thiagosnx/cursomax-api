@@ -36,6 +36,7 @@ class CursoController extends Controller
         $dados = $request->all();
         $curso = new Curso;
         $curso->ttl = $dados['titulo'];
+        $curso->dett = $dados['dett'];
         $curso->dt_lcmt = $dados['data_lancamento'];
         $curso->cghr = $dados['carga_horaria'];
         $curso->img = $dados['img'];
@@ -51,32 +52,46 @@ class CursoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(int $id)
     {
-        //
+        $curso = DB::table('cursos')
+                    ->select(
+                        'id'
+                        , 'ttl'
+                        , 'cghr'
+                        , 'tip'
+                        , 'dt_lcmt'
+                        , 'img'   
+                        , 'url'
+                        , 'ntc'
+                    )
+                    ->where('id', $id)
+                    ->first();
+        return response()->json($curso);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(Request $request, int $id)
     {
-        //
+        $curso = Curso::findOrFail($id);
+        $dados = $request->all();
+        $curso->ttl = $dados['titulo'] ?? $curso->ttl;
+        $curso->dett = $dados['dett'] ?? $curso->dett;
+        $curso->dt_lcmt = $dados['data_lancamento'] ?? $curso->dt_lcmt;
+        $curso->cghr = $dados['carga_horaria'] ?? $curso->cghr;
+        $curso->img = $dados['img'] ?? $curso->img;
+        $curso->url = $dados['url'] ?? $curso->url;
+        $curso->tip = $dados['tipo'] ?? $curso->tip;
+        $curso->ntc = $dados['noticia'] ?? $curso->ntc;
+        $curso->emp = $dados['empresa'] ?? $curso->emp;
+        $curso->save();
+        return response()->json($curso, 200);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    
+    public function destroy(int $id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $curso = Curso::findOrFail($id);
+        $curso->delete();
+        return response()->json('Curso deletado com sucesso', 204);
     }
 }
