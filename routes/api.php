@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\AuthController;
 
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
+Route::post('logout', [AuthController::class, 'logout']);
 
 Route::get('/curso', [CursoController::class, 'index']);
 Route::get('/curso/{id}', [CursoController::class, 'show']);
