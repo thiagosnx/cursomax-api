@@ -27,15 +27,15 @@ class CursoController extends Controller
     {
         $dados = $request->all();
         $curso = new Curso;
-        $curso->ttl = $dados['titulo'];
+        $curso->ttl = $dados['ttl'];
         $curso->dett = $dados['dett'];
-        $curso->dt_lcmt = $dados['data_lancamento'];
-        $curso->cghr = $dados['carga_horaria'];
+        $curso->dt_lcmt = $dados['dt_lcmt'];
+        $curso->cghr = $dados['cghr'];
         $curso->img = $dados['img'];
         $curso->url = $dados['url'];
-        $curso->tip = $dados['tipo'] || 0;
-        $curso->ntc = $dados['noticia'] || 0;
-        $curso->emp = $dados['empresa'];
+        $curso->tip = $dados['tip'] || 0;
+        $curso->ntc = $dados['ntc'] || 0;
+        $curso->emp = $dados['emp'];
         $curso->save();
         return response()->json($curso, 201);
 
