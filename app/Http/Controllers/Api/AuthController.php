@@ -23,11 +23,11 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $credentials = $request->only('username', 'password');
-        if(!$token = Auth::guard('api')->attempt($credentials)){
+        $credenciais = $request->only('username', 'password');
+        if(!$token = Auth::guard('api')->attempt($credenciais)){
             return response()->json(['error' => 'Credenciais inválidas'], 401);
         }
-        return $this->respondWithToken($token);
+        return $this->respostaToken($token);
     }
 
     public function me()
@@ -42,12 +42,8 @@ class AuthController extends Controller
         return response()->json(['message' => 'Logout realizado com sucesso']);
     }
 
-    public function refresh()
-    {
-        return $this->respondWithToken(Auth::refresh());
-    }
 
-    protected function respondWithToken($token)
+    protected function respostaToken($token)
     {
         return response()->json([
             'access_token' => $token,
