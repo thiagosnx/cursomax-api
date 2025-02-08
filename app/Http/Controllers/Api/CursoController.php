@@ -12,22 +12,14 @@ class CursoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $cursos = DB::table('cursos')
-                    ->select(
-                        'id'
-                        , 'ttl'
-                        , 'cghr'
-                        , 'tip'
-                        , 'dt_lcmt'
-                        , 'img'   
-                        , 'url'
-                        , 'ntc'
-                    )
-                    ->orderBy('dt_lcmt')
-                    ->get();
-        return response()->json($cursos);
+        $limite = $request->query('_limit', 10);
+        $pagina = $request->query('_page', 1);
+
+        $cursos = Curso::query()->paginate($limite, ['*'], 'page', $pagina);
+        
+        return response()->json($cursos->items());
     }
 
     
@@ -49,9 +41,6 @@ class CursoController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(int $id)
     {
         $curso = DB::table('cursos')
