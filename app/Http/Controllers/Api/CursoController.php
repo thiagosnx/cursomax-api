@@ -63,15 +63,15 @@ class CursoController extends Controller
     {
         $curso = Curso::findOrFail($id);
         $dados = $request->all();
-        $curso->ttl = $dados['titulo'] ?? $curso->ttl;
+        $curso->ttl = $dados['ttl'] ?? $curso->ttl;
         $curso->dett = $dados['dett'] ?? $curso->dett;
-        $curso->dt_lcmt = $dados['data_lancamento'] ?? $curso->dt_lcmt;
-        $curso->cghr = $dados['carga_horaria'] ?? $curso->cghr;
+        $curso->dt_lcmt = $dados['dt_lcmt'] ?? $curso->dt_lcmt;
+        $curso->cghr = $dados['cghr'] ?? $curso->cghr;
         $curso->img = $dados['img'] ?? $curso->img;
         $curso->url = $dados['url'] ?? $curso->url;
-        $curso->tip = $dados['tipo'] ?? $curso->tip;
-        $curso->ntc = $dados['noticia'] ?? $curso->ntc;
-        $curso->emp = $dados['empresa'] ?? $curso->emp;
+        $curso->tip = $dados['tip'] ?? $curso->tip;
+        $curso->ntc = $dados['ntc'] ?? $curso->ntc;
+        $curso->emp = $dados['emp'] ?? $curso->emp;
         $curso->save();
         return response()->json($curso, 200);
     }

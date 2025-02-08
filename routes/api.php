@@ -11,7 +11,7 @@ Route::post('logout', [AuthController::class, 'logout']);
 Route::post('me', [AuthController::class, 'me']);
 
 Route::get('/curso', [CursoController::class, 'index']);
-Route::get('/curso/{id}', [CursoController::class, 'show']);
+// Route::get('/curso/{id}', [CursoController::class, 'show']);
 Route::middleware('auth:api')->group(function(){
-    Route::apiResource('/curso', CursoController::class)->except(['index', 'show']);;
+    Route::apiResource('/curso', CursoController::class)->except(['index']);;
 });
