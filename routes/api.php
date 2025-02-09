@@ -11,7 +11,7 @@ Route::post('login', [AuthController::class, 'login']);
 Route::post('logout', [AuthController::class, 'logout']);
 Route::post('me', [AuthController::class, 'me']);
 
-Route::apiResource('/contrubuicao', ContribuinteController::class);
+Route::apiResource('/contribuicao', ContribuinteController::class);
 Route::post('/pgto', [ContribuinteController::class, 'iniciaPgto']);
 
 Route::get('/curso', [CursoController::class, 'index']);
