@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('ip');
             $table->string('email')->default('email@email.com');
             $table->double('valor');
-            $table->integer('id_pgto');
+            $table->bigInteger('id_pgto');
             $table->string('idempotence');
             $table->string('status');
             $table->timestamps();
