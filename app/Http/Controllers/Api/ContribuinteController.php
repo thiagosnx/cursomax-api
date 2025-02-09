@@ -77,7 +77,9 @@ class ContribuinteController extends Controller
         if(!$retorno['qr_code_base64']){
             return response()->json(['message' => 'Algo deu errado ao gerar o pagamento'], 400);
         }
-        return $this->salvaPgto($retorno);
+        $this->salvaPgto($retorno);
+
+        return response()->json($retorno);
 
     }
     public function salvaPgto(array $pgto){
