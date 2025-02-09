@@ -17,7 +17,9 @@ class CursoController extends Controller
         $limite = $request->query('_limit', 10);
         $pagina = $request->query('_page', 1);
 
-        $cursos = Curso::query()->paginate($limite, ['*'], 'page', $pagina);
+        $cursos = Curso::query()
+        ->orderBy('created_at', 'desc')
+        ->paginate($limite, ['*'], 'page', $pagina);
         
         return response()->json($cursos->items());
     }
